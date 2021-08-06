@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { firestore } from "./firebase";
 import Login from "./Login";
 import Home from "./Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// Context Api use ki hai yaa
+let userContext = createContext();
 
 function App() {
 
@@ -31,20 +34,25 @@ function App() {
       {/* React fragement */}
       <>
         <Router>
+          <userContext.Provider value={user}>
           <Switch>
-
-            <Route path="/login">
-              <Login handlerUser={setUser} user={user} />
-            </Route>
-
+            
             <Route path="/home">
-              <Home user={user} />
+              <Home />
             </Route>
+
+            <Route path="/">
+              <Login handlerUser={setUser} />
+            </Route>
+            
           </Switch>
+          </userContext.Provider>
         </Router>
       </>
     </div>
   );
 }
+
+export { userContext };
 
 export default App;
