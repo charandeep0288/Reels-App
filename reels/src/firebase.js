@@ -5,6 +5,8 @@ import "firebase/firestore";
 // Step 1 
 import "firebase/auth";
 
+// for storing data files videos
+import "firebase/storage";
 
 var firebaseConfig = {
     apiKey: "AIzaSyCu0b-kqdEKLnHJANqnYuo1m0apwpLvAH8",
@@ -18,6 +20,8 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const firestore = firebase.firestore();
+
+export const storage = firebase.storage(); // to store videos
 
 // Step 2
 export const auth = firebase.auth(); // authication object 

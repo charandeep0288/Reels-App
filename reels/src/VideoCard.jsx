@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-let VideoCard = () => {
+let VideoCard = (props) => {
 
     // for opening and closing of the comment box
     let [boxOpen, setBoxOpen] = useState(false);
@@ -12,17 +12,18 @@ let VideoCard = () => {
     return (
         <div className="video-card">
 
-            <video src="https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4"
-            onClick={(e) => {
-                // to play & pause the video
-                if(playing){
-                    setPlaying(false);
-                    e.currentTarget.pause();
-                } else {
-                    setPlaying(true);
-                    e.currentTarget.play();
-                };
-            }}
+            <video
+                src={props.posts.url}
+                onClick={(e) => {
+                    // to play & pause the video
+                    if (playing) {
+                        setPlaying(false);
+                        e.currentTarget.pause();
+                    } else {
+                        setPlaying(true);
+                        e.currentTarget.play();
+                    };
+                }}
             ></video>
 
             <span class="material-icons-outlined like">favorite_border</span>
@@ -43,27 +44,27 @@ let VideoCard = () => {
             </p>
 
             <p className="song">
-                <span class="material-icons-outlined">music_note</span>
+                <span className="material-icons-outlined">music_note</span>
                 {/* woo song kaa text gol gol guma gaa issa                 */}
                 <marquee>Yaar Anmulla</marquee>
             </p>
 
             {boxOpen ? (
-            <div className="comment-box">
-                <button 
-                className="comment-box-close-btn"
-                onClick={() => {
-                    setBoxOpen(false);
-                }}
-                >Close</button>
+                <div className="comment-box">
+                    <button
+                        className="comment-box-close-btn"
+                        onClick={() => {
+                            setBoxOpen(false);
+                        }}
+                    >Close</button>
 
-                <div className="all-comments"></div>
+                    <div className="all-comments"></div>
 
-                <div className="comment-form">
-                    <input /> 
-                    <button>Post</button>
+                    <div className="comment-form">
+                        <input />
+                        <button>Post</button>
+                    </div>
                 </div>
-            </div>
             ) : (
                 ""
             )}
