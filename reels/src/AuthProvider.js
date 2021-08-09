@@ -32,12 +32,12 @@ let AuthProvider = ({children}) => {
                         // posts: [],
                         photoURL,
                     });
-                } 
+                }; 
 
                 setCurrentUser({ displayName, email, uid, photoURL });
             } else {
                 setCurrentUser(user);
-            }
+            };
             // console.log(user);
             setLoading(false);
         });
@@ -45,7 +45,7 @@ let AuthProvider = ({children}) => {
         // cleanup
         return () => {
             unsub();
-        }
+        };
     }, []);
 
     //jab user login yaa logout pura kr lega tab loading false ho jaigi

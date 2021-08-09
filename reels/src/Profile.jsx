@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import { firestore } from "./firebase";
 
+import "./Profile.css";
 
 let Profile = () => {
 
@@ -14,7 +15,7 @@ let Profile = () => {
     useEffect(() => {
         let f = async () => {
             let querySnapshot = await firestore
-                .collection
+                .collection("posts")
                 .where("username", "==", value.displayName)
                 .get();
 
@@ -30,7 +31,7 @@ let Profile = () => {
         <>
             { value ? (
                 <div>
-                    <img src={value.photoURL} alt="User Post"/>
+                    <img className="profile-img" src={value.photoURL} alt="User Post"/>
                     <p className="username-profile">{value.displayName}</p>
                     <p className="ttpost">Total Posts: {totalPosts}</p>
                 </div>
@@ -38,7 +39,7 @@ let Profile = () => {
                 <Redirect to="/login" />
             )}
         </>
-    )
-}
+    );
+};
 
 export default Profile;

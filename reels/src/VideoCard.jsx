@@ -38,7 +38,7 @@ let VideoCard = (props) => {
         <div className="video-card">
 
             <video
-                src={props.posts.url}
+                src={props.post.url}
                 onClick={(e) => {
                     // to play & pause the video
                     if (playing) {
@@ -88,7 +88,7 @@ let VideoCard = (props) => {
                         {allComments.map((comment, index) => {
                             return (
                                 <div key={index}>
-                                    <img src={comment.pic} />
+                                    <img className="comment-profile-img" src={comment.pic} />
                                     <div>
                                         <p>
                                             <b>{comment.username}</b>
@@ -123,7 +123,7 @@ let VideoCard = (props) => {
                             }).then(doc => {
                                 firestore
                                     .collection("posts")
-                                    .doc(props.posts.id)
+                                    .doc(props.post.id)
                                     .update({
                                         comments: [...props.post.comments, doc.id],
                                     });
