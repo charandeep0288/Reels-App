@@ -1,19 +1,55 @@
-.profile-img{
-    display: block;
-    margin: auto;
-    margin-top: 2rem;
-    height: 20rem;
-    width: 20rem;
+
+.profile-img {
+    height: 8rem;
+    width: 8rem;
+    border-radius: 50%;
+    position: absolute;
+    left: 4rem;
+    top: 3rem;
 }
 
 .username-profile{
-    text-align: center;
-    padding-top: 3rem;
-    font-size: 3rem;
-    font-weight: 100;
+    position: absolute;
+    position: absolute;
+    left: 4rem;
+    top: 12rem;
+    font-weight: 700;
+    outline: none;
 }
 
+
 .ttpost{
-    text-align: center;
-    font-size: 2rem;
+    position: absolute;
+    left: 19.2rem;
+    top: 8rem;
 }
+
+.ttpost-count{
+    position: absolute;
+    top: 6rem;
+    left: 20rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+hr{
+    position: relative;
+    top: 15rem;
+    height: 3px;
+    width: 95%;
+    margin: auto;
+}
+
+.user-posts{
+    position: absolute;
+    top: 18rem;
+    width: 100%;
+}
+
+/* .video-card {
+    display: flex;
+    text-align: center;
+    height: 32rem;
+    width: 30rem;
+    margin-left: 2rem;
+} */

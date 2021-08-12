@@ -59,17 +59,24 @@ body {
 .like {
     font-size: 40px;
     /* flat UI color se color lia hai */
-    color: #d63031;
     position: absolute;
-    bottom: 20vh;
+    bottom: 30vh;
+    right: 10px;
+}
+.liked {
+    font-size: 40px;
+    /* flat UI color se color lia hai */
+    color: #EF0107;
+    position: absolute;
+    bottom: 30vh;
     right: 10px;
 }
 
 .comment {
-    font-size: 40px;
+    font-size: 35px;
     /* apna parent ka respect mai hoga position */
     position: absolute;
-    bottom: 14vh;
+    bottom: 21vh;
     right: 10px;
 }
 
@@ -77,6 +84,12 @@ body {
     position: absolute;
     bottom: 20vh;
     left: 20px;
+}
+
+.follow-btn{
+    position: absolute;
+    bottom: 9rem;
+    left: 10.4rem;
 }
 
 .song {
@@ -87,11 +100,28 @@ body {
     justify-content: space-around;
 }
 
+.caption{
+    position: absolute;
+    bottom: 10vh;
+    left: 20px;
+    outline: none;
+}
+
 video {
     height: 100%;
     width: 100%;
     /* crop kar data hai vedio koo */
     object-fit: cover;
+}
+
+.post-like-count{
+    position: absolute;
+    bottom: 25vh;
+    left: 27.9rem;
+}
+
+.comment-container{
+    word-break: break-all;
 }
 
 .comment-box {

@@ -13,6 +13,12 @@ let VideoCard = (props) => {
 
     let [currentUserComment, setCurrentUserComment] = useState("");
     let [allComments, setAllComments] = useState([]);
+    let [currentUserLike, setCurrentUserLike] = useState(false);
+
+    let [currentUserFollowing, setCurrentUserFollowing] = useState(false);
+    let [followers, setFollowers] = useState([]);
+    let [following, setFollowing] = useState([]);
+    // let [currentUserCaption, setCurrentUserCaption] = useState("");
 
     let value = useContext(AuthContext);
 
@@ -29,10 +35,20 @@ let VideoCard = (props) => {
                 arr.push(commentData);
             };
             setAllComments(arr);
+
+            let isUserLikedPersent = props.post.likes.filter((id) => {
+                return id === value.uid;
+            });
+            // console.log(isUserLikedPersent);
+
+            if (isUserLikedPersent[0] === value.uid) {
+                console.log(isUserLikedPersent);
+                setCurrentUserLike(true);
+            }
         };
 
         f();
-    }, []);
+    }, [props]);
 
     return (
         <div className="video-card">
@@ -51,7 +67,56 @@ let VideoCard = (props) => {
                 }}
             ></video>
 
-            <span class="material-icons-outlined like">favorite_border</span>
+            {!currentUserLike ?
+                <div>
+                    <span
+                        onClick={() => {
+                            // e.currentTarget.classList = "material-icons-outlined";
+                            setCurrentUserLike(true);
+                            // allLikes = ;
+
+                            // setAllLikes(value.uid);
+
+                            firestore
+                                .collection("posts")
+                                .doc(props.post.id)
+                                .update({
+                                    likes: [...props.post.likes, value.uid],
+                                });
+
+
+                        }}
+
+                        class="material-icons-outlined like">favorite_border
+                    </span>
+                </div>
+                :
+                <div>
+                    <span
+                        onClick={() => {
+                            setCurrentUserLike(false);
+
+                            let isUserLikedPersent = props.post.likes.filter((id) => {
+                                return id !== value.uid;
+                            });
+
+                            firestore
+                                .collection("posts")
+                                .doc(props.post.id)
+                                .update({
+                                    likes: isUserLikedPersent,
+                                });
+
+                            console.log(isUserLikedPersent);
+
+                        }}
+                        class="material-icons-outlined liked">
+                        favorite
+                    </span>
+                </div>
+
+            }
+            <p className="post-like-count">{props.post.likes.length}</p>
 
             <span
                 class="material-icons-outlined comment"
@@ -62,11 +127,44 @@ let VideoCard = (props) => {
                     else
                         setBoxOpen(true);
                 }}
-            >chat_bubble</span>
+            >mode_comment</span>
 
             <p className="username">
                 <b>{props.post.username}</b>
             </p>
+
+            {!currentUserFollowing ?
+                <>
+                    <button
+                        onClick={() => {
+                            // console.log(value.follow)
+                            setFollowing(value.uid)
+                            console.log(following);
+
+                            firestore
+                                .collection("user")
+                                .doc(value.uid)
+                                .update({
+                                    following: [...value.following, value.uid],
+                                });
+                        }}
+                        
+                        className="follow-btn">
+                        Follow
+                    </button>
+                </>
+                :
+                <>
+                <button
+                        onClick={() => {
+                            console.log(value.follow)
+
+                        }}
+                        className="follow-btn">
+                        Following
+                    </button>
+                </>
+            }
 
             <p className="song">
                 <span className="material-icons-outlined">music_note</span>
@@ -87,7 +185,7 @@ let VideoCard = (props) => {
 
                         {allComments.map((comment, index) => {
                             return (
-                                <div key={index}>
+                                <div key={index} className="comment-container">
                                     <img className="comment-profile-img" src={comment.pic} />
                                     <div>
                                         <p>
@@ -114,6 +212,7 @@ let VideoCard = (props) => {
                                 comment: currentUserComment,
                                 username: value.displayName,
                                 pic: value.photoURL,
+
                             });
 
                             setCurrentUserComment("");
@@ -136,7 +235,13 @@ let VideoCard = (props) => {
                 ""
             )}
 
-            <p className="caption"></p>
+            <div
+                // onKeyDown={(e) => {
+                //     if(e.code === "shift + Enter" && e.code === "Enter")
+                //     console.log(e.currentTarget.innerText);
+                //     setCurrentUserCaption(e.currentTarget.innerHTML);
+                // }}
+                className="caption" >Add Caption</div>
         </div>
     );
 };

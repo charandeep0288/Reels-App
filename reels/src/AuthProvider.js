@@ -17,6 +17,7 @@ let AuthProvider = ({children}) => {
             // if login -> user info
             // if logout -> user = null
             if (user) {
+                let followers =[], following =[];
                 let { displayName, email, uid, photoURL } = user; // destructuring kar raha hai
                 // console.log(user); //user kaa object display kar raha hai
 
@@ -29,12 +30,13 @@ let AuthProvider = ({children}) => {
                     docRef.set({
                         displayName,
                         email,
-                        // posts: [],
+                        followers: [],
+                        following: [],
                         photoURL,
                     });
                 }; 
 
-                setCurrentUser({ displayName, email, uid, photoURL });
+                setCurrentUser({ displayName, email, uid, photoURL, followers, following });
             } else {
                 setCurrentUser(user);
             };

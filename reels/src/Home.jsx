@@ -32,7 +32,7 @@ let Home = () => {
             
             let arr = [];
             querySnapshot.forEach((doc) => {
-                console.log(doc.data());
+                // console.log(doc.data());
                 arr.push({...doc.data(), id: doc.id});
                 // return {...doc.data(), id: doc.id};
             });
@@ -67,8 +67,8 @@ let Home = () => {
                         <VideoCard /> */}
                         
                         {posts.map((post, index) => {
-                            console.log("1");
-                            console.log(post);
+                            // console.log("1");
+                            // console.log(post);
                             return <VideoCard key={index} post={post} />
                         })}
 
@@ -150,14 +150,15 @@ let Home = () => {
                                 // getDownloadURL method is used to generate the url, it gives a promise 
                                 let p = uploadtask.snapshot.ref.getDownloadURL();
                                 p.then((url) => {
-                                    console.log(url);
+                                    // console.log(url);
 
                                     // ik post add kar raha hai posts name ki collection mai
                                     firestore.collection("posts").add({
                                         uid: value.uid,
                                         username: value.displayName,
                                         url,
-                                        likes: 0,
+                                        caption: "Add Caption",
+                                        likes: [],
                                         comments: [],
                                         
                                     });
@@ -181,12 +182,12 @@ let Home = () => {
                             // upload hooo rahi hai file state change hoo rahi hai
                             uploadtask.on("state_changed", f1, f2, f3);
 
-                           
-
                             // upload
+
                         }
                     }} className="upload-btn" 
                         type="file"/>
+
                 </>
             ) : (
                 <Redirect to="/" />
