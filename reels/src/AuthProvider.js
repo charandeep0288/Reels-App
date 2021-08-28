@@ -28,7 +28,7 @@ let AuthProvider = ({children}) => {
                 console.log(document.exist); //
                 if(!document.exist){
                     docRef.set({
-                        displayName,
+                        displayName, 
                         email,
                         followers: [],
                         following: [],

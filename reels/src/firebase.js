@@ -31,6 +31,11 @@ export const auth = firebase.auth(); // authication object
 // Step 4
 let provider = new firebase.auth.GoogleAuthProvider(); // provider bata raha hai konsi servies use kara gai authentication ka lia
 
+export const getDatabase = {
+    users: firestore.collection("users"),
+    getUserTimeStamp: firebase.firestore.FieldValue.serverTimestamp
+}
+
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider); // // sign in karna hai popup ka sath google kaa
 

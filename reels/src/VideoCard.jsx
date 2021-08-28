@@ -1,3 +1,5 @@
+import { getDatabase, ref } from "./firebase";
+
 import { useContext, useState, useEffect } from "react";
 import { firestore } from "./firebase";
 
@@ -138,27 +140,52 @@ let VideoCard = (props) => {
                     <button
                         onClick={() => {
                             // console.log(value.follow)
-                            setFollowing(value.uid)
-                            console.log(following);
-
+                            setCurrentUserFollowing(true);
+                            // setFollowing(value.uid);
+                            console.log(value.uid);
                             firestore
-                                .collection("user")
+                                .collection("users")
                                 .doc(value.uid)
                                 .update({
                                     following: [...value.following, value.uid],
                                 });
                         }}
-                        
+
                         className="follow-btn">
                         Follow
                     </button>
                 </>
                 :
                 <>
-                <button
-                        onClick={() => {
-                            console.log(value.follow)
+                    <button
+                        onClick={async () => {
+                            // console.log(value.follow)
+                            setCurrentUserFollowing(false);
 
+                            console.log(value.uid);
+                            let docRef = firestore.collection("users").doc(value.uid);
+                            let document = await docRef.get();
+                            
+                            console.log(document.exists);
+                            console.log(document); 
+                            console.log(await getDatabase.users.doc(value.uid).get());
+
+                            // const ans = getDatabase.users.doc(value.uid).onSnapshot((doc) => {
+                            //     return doc;
+                            // });
+                            // console.log(ans);                        
+
+
+                            // let isUserfollowing = document.following.filter((id) => {
+                            //     return id !== value.uid;
+                            // });
+
+                            // firestore
+                            // .collection("users")
+                            // .doc(value.uid)
+                            // .update({
+                            //     following: [isUserfollowing],
+                            // });
                         }}
                         className="follow-btn">
                         Following
